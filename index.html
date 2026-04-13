@@ -20,10 +20,22 @@
     background: white;
     padding: 0.65in 0.7in 0.65in 0.7in;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    position: relative;
   }
 
-  /* Header */
-  .header { border-bottom: 2.5pt solid #1B4F72; padding-bottom: 8px; margin-bottom: 10px; }
+  /* Header with photo */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    border-bottom: 2.5pt solid #1B4F72;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .header-content {
+    flex: 1;
+    min-width: 0;
+  }
   .name {
     font-size: 22pt;
     font-weight: 700;
@@ -49,6 +61,16 @@
   }
   .contact a { color: #2E86C1; text-decoration: none; }
   .contact-sep { color: #aaa; }
+
+  .profile-photo {
+    width: 130px;
+    height: 155px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 4px solid #1B4F72;
+    box-shadow: 0 6px 18px rgba(27, 79, 114, 0.25);
+    flex-shrink: 0;
+  }
 
   /* Sections */
   .section { margin-top: 11px; }
@@ -108,28 +130,73 @@
     color: #1B4F72;
   }
 
+  /* PDF Print Button - Modern UI/UX */
+  .pdf-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #1B4F72, #2E86C1);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 8px 25px rgba(27, 79, 114, 0.35);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 9999;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    font-family: 'Calibri', 'Arial', sans-serif;
+  }
+  .pdf-button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(27, 79, 114, 0.45);
+  }
+  .pdf-button:active {
+    transform: scale(0.95);
+  }
+
   @media print {
     body { background: white; padding: 0; }
-    .page { box-shadow: none; padding: 0.5in 0.6in; }
+    .page { 
+      box-shadow: none; 
+      padding: 0.5in 0.6in; 
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+    .pdf-button { display: none !important; }
+    .header { padding-bottom: 8px; margin-bottom: 10px; }
   }
 </style>
 </head>
 <body>
+
 <div class="page">
 
-  <!-- HEADER -->
+  <!-- HEADER with integrated profile photo -->
   <div class="header">
-    <div class="name">Harshavardhan Pratap Nimbalkar</div>
-    <div class="title-line">Civil Engineering Graduate &nbsp;|&nbsp; Trainee Civil Designer &nbsp;|&nbsp; CAD &amp; Site Operations</div>
-    <div class="contact">
-      <span>📍 Jalgaon, MH — Open to relocate to Pune immediately</span>
-      <span class="contact-sep">|</span>
-      <span>📞 +91 9511921903</span>
-      <span class="contact-sep">|</span>
-      <a href="mailto:harshavardhannimbalkar90@gmail.com">harshavardhannimbalkar90@gmail.com</a>
-      <span class="contact-sep">|</span>
-      <a href="https://linkedin.com/in/harshavardhan-nimbalkar-civilengineer" target="_blank">LinkedIn Profile</a>
+    <div class="header-content">
+      <div class="name">Harshavardhan Pratap Nimbalkar</div>
+      <div class="title-line">Civil Engineering Graduate &nbsp;|&nbsp; Trainee Civil Designer &nbsp;|&nbsp; CAD &amp; Site Operations</div>
+      <div class="contact">
+        <span>📍 Jalgaon, MH — Open to relocate to Pune immediately</span>
+        <span class="contact-sep">|</span>
+        <span>📞 +91 9511921903</span>
+        <span class="contact-sep">|</span>
+        <a href="mailto:harshavardhannimbalkar90@gmail.com">harshavardhannimbalkar90@gmail.com</a>
+        <span class="contact-sep">|</span>
+        <a href="https://linkedin.com/in/harshavardhan-nimbalkar-civilengineer" target="_blank">LinkedIn Profile</a>
+      </div>
     </div>
+    
+    <!-- YOUR PROFILE PHOTO (cover image) - replace src if needed -->
+    <img src="profile-photo.jpg" alt="Harshavardhan Pratap Nimbalkar" class="profile-photo">
   </div>
 
   <!-- PROFESSIONAL SUMMARY -->
@@ -225,5 +292,17 @@
   </div>
 
 </div>
+
+<!-- PDF PRINT BUTTON (bottom-right corner) -->
+<button onclick="printResume()" class="pdf-button" title="Print / Save as PDF">
+  🖨️ Save as PDF
+</button>
+
+<script>
+  function printResume() {
+    window.print();
+  }
+</script>
+
 </body>
 </html>
